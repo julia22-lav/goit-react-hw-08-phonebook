@@ -1,78 +1,59 @@
 import './App.css';
-import { Component } from 'react';
-import ContactForm from './components/ContactForm';
+import React, { Component, Suspense, lazy } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import AppBar from './components/AppBar';
+import authOperations from './redux/auth/auth-operations';
+import { connect } from 'react-redux';
+import PrivateRoute from './components/AppBar/PrivateRoute';
+import PublicRoute from './components/AppBar/PublicRoute';
+// import ContactForm from './components/ContactForm';
 // import { v4 as genId } from 'uuid';
-import ContactList from './components/ContactList';
-import Filter from './components/Filter';
+// import ContactList from './components/ContactList';
+// import Filter from './components/Filter';
+
+const HomePage = lazy(() =>
+  import('./pages/home-page' /*WebpackChunkName: HomePage */),
+);
+const LoginPage = lazy(() =>
+  import('./pages/login-page' /*WebpackChunkName: LoginPage */),
+);
+const RegisterPage = lazy(() =>
+  import('./pages/register-page' /*WebpackChunkName: RegisterPage */),
+);
+const ContactsPage = lazy(() =>
+  import('./pages/contacts-page' /*WebpackChunkName: ContactsPage */),
+);
 
 class App extends Component {
-  // state = {
-  //   contacts: [
-  //     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  //     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  //     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  //     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  //   ],
-  //   filter: '',
-  // };
-
-  // componentDidMount() {
-  //   const parsedContacts = JSON.parse(localStorage.getItem(`contacts`));
-
-  //   if (parsedContacts) {
-  //     this.setState({ contacts: parsedContacts });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
-
-  // addNewContact = ({ name, number }) => {
-  //   const nameList = this.state.contacts.map(contact => contact.name);
-  //   if (nameList.includes(name)) {
-  //     alert(`${name} already in your contact list`);
-  //     return;
-  //   }
-
-  //   this.setState(prevState => ({
-  //     contacts: [...prevState.contacts, { name, id: genId(), number }],
-  //   }));
-  // };
-
-  // contactsToShow = () => {
-  //   const { filter, contacts } = this.state;
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return contacts.filter(({ name }) => {
-  //     return name ? name.toLowerCase().includes(normalizedFilter) : false;
-  //   });
-  // };
-
-  // deleteContact = contactId => {
-  //   this.setState(prevState => {
-  //     return {
-  //       contacts: prevState.contacts.filter(({ id }) => id !== contactId),
-  //     };
-  //   });
-  // };
-
-  // filterChange = event => {
-  //   this.setState({ filter: event.currentTarget.value });
-  // };
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
 
   render() {
     return (
       <>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
+        <AppBar />
+        <Suspense fallback={<p>Loading...</p>}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <PublicRoute
+              exact
+              path="/register"
+              restricted
+              component={RegisterPage}
+            />
+            <PublicRoute exact path="/login" restricted component={LoginPage} />
+            <PrivateRoute exact path="/contacts" component={ContactsPage} />
+            <Route component={HomePage} />
+          </Switch>
+        </Suspense>
       </>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);
