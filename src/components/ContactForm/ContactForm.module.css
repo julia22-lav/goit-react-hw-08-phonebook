@@ -1,30 +1,3 @@
-/* .contactForm {
-  outline: 2px solid black;
-  width: 250px;
-  margin-left: 10px;
-  padding: 20px;
-  background-color: violet;
-}
-
-.labelForm {
-  display: block;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  font-weight: normal;
-  font-size: 18px;
-}
-
-.inputForm {
-  display: block;
-  margin-right: 20px;
-  background-color: bisque;
-}
-
-.buttonForm {
-  padding: 8px;
-  border-radius: 5px;
-} */
-
 .Form {
   width: 80%;
 }
@@ -32,4 +5,15 @@
 .Button {
   display: block;
   margin-top: 15px;
+}
+
+.TextLabel {
+  margin-bottom: 0;
+  color: purple;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.FormControl {
+  margin-bottom: 12px;
 }

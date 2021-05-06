@@ -10,7 +10,9 @@ const UserMenu = ({ avatar, name, onLogout }) => {
   return (
     <div style={{ marginLeft: 'auto', width: 'auto' }}>
       <img className={s.Avatar} src={avatar} alt="" width="32" />
-      <span>Welcome, {name}</span>
+      <span style={{ color: 'purple', fontSize: '18px', fontWeight: 'bold' }}>
+        Welcome, {name}
+      </span>
       <Button
         className={s.Button}
         variant="light"

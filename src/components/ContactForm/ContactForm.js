@@ -40,8 +40,9 @@ class ContactForm extends Component {
     return (
       <Form onSubmit={this.onSubmit} className={s.Form}>
         <Form.Group controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label className={s.TextLabel}>Name</Form.Label>
           <Form.Control
+            className={s.FormControl}
             type="name"
             name="name"
             value={this.state.name}
@@ -51,8 +52,9 @@ class ContactForm extends Component {
         </Form.Group>
 
         <Form.Group controlId="formBasicNumber">
-          <Form.Label>Number</Form.Label>
+          <Form.Label className={s.TextLabel}>Number</Form.Label>
           <Form.Control
+            className={s.FormControl}
             type="tel"
             name="number"
             placeholder="Enter phone number"
