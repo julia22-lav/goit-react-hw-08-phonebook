@@ -1,9 +1,10 @@
 import { Component } from 'react';
-import { v4 as genId } from 'uuid';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 import { connect } from 'react-redux';
 import operations from '../../redux/contacts/contacts-operations';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 class ContactForm extends Component {
   state = {
@@ -11,7 +12,9 @@ class ContactForm extends Component {
     number: '',
   };
   onChange = event => {
+    // this.reset();
     event.preventDefault();
+
     console.dir(event.currentTarget);
     const { value, name } = event.currentTarget;
     const currentState = this.state;
@@ -23,6 +26,7 @@ class ContactForm extends Component {
     event.preventDefault();
     this.props.onSubmit(this.state);
     this.reset();
+    event.currentTarget.value = '';
   };
 
   reset = () => {
@@ -33,38 +37,33 @@ class ContactForm extends Component {
   };
 
   render() {
-    const nameId = genId();
-    const telId = genId();
     return (
-      <form onSubmit={this.onSubmit} className={s.contactForm}>
-        <label htmlFor={nameId} className={s.labelForm}>
-          Name
-          <input
-            type="text"
+      <Form onSubmit={this.onSubmit} className={s.Form}>
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
             name="name"
-            id={nameId}
             value={this.state.name}
+            placeholder="Enter name"
             onChange={this.onChange}
-            className={s.inputForm}
           />
-        </label>
+        </Form.Group>
 
-        <label htmlFor={telId} className={s.labelForm}>
-          Tel
-          <input
+        <Form.Group controlId="formBasicNumber">
+          <Form.Label>Number</Form.Label>
+          <Form.Control
             type="tel"
             name="number"
-            id={telId}
+            placeholder="Enter phone number"
             value={this.state.number}
-            // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
             onChange={this.onChange}
-            className={s.inputForm}
           />
-        </label>
-        <button type="submit" className={s.buttonForm}>
-          Add Contact
-        </button>
-      </form>
+        </Form.Group>
+        <Button className={s.Button} variant="primary" type="submit">
+          Add contact
+        </Button>
+      </Form>
     );
   }
 }

@@ -17,7 +17,7 @@ const SideNav = () => {
       </li>
       <li className={s.SideNavLink}>
         <NavLink
-          to="/movies"
+          to="/contacts"
           exact
           className={s.NavLink}
           activeClassName={s.NavLinkActive}

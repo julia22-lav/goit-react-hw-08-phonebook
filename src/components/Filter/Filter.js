@@ -4,24 +4,28 @@ import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 import { connect } from 'react-redux';
 import actions from '../../redux/contacts/contacts-actions';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
 
 class Filter extends Component {
   render() {
-    const filterInputId = genId();
     const { filterState, filterChange } = this.props;
 
     return (
-      <label htmlFor={filterInputId} className={s.labelFilter}>
-        Search Contacts by Name
-        <input
+      <Form inline>
+        <FormControl
           type="text"
           name="filter"
-          id={filterInputId}
           value={filterState}
           onChange={filterChange}
-          className={s.inputFilter}
+          placeholder="Search"
+          className="mr-sm-2"
         />
-      </label>
+        <Button className={s.Button} variant="primary">
+          Search by contact name
+        </Button>
+      </Form>
     );
   }
 }

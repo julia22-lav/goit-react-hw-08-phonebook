@@ -7,7 +7,7 @@ class ContactListItem extends Component {
     const { id, name, number, deleteContact } = this.props;
     return (
       <li id={id} className={s.listItem}>
-        {name}:{number}
+        {name}: {number}
         <button
           onClick={() => {
             deleteContact(id);

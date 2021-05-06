@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { v4 as genId } from 'uuid';
 import authOperations from '../../redux/auth/auth-operations';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import s from './LoginPage.module.css';
 
 class LoginPage extends Component {
   state = { email: '', password: '' };
@@ -24,35 +26,35 @@ class LoginPage extends Component {
     this.reset();
   };
   render() {
-    const emailInputId = genId();
-    const passwordInputId = genId();
     return (
       <>
         <h2>Login page</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor={emailInputId}>
-            Email
-            <input
-              type="emal"
+        <Form onSubmit={this.handleSubmit} className={s.Form}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
               name="email"
-              id={emailInputId}
               value={this.state.email}
+              placeholder="Enter email"
               onChange={this.handleChange}
             />
-          </label>
+          </Form.Group>
 
-          <label htmlFor={passwordInputId}>
-            Password
-            <input
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
               type="password"
               name="password"
-              id={passwordInputId}
+              placeholder="Enter password"
               value={this.state.password}
               onChange={this.handleChange}
             />
-          </label>
-          <button type="submit">Sign in</button>
-        </form>
+          </Form.Group>
+          <Button className={s.Button} variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
       </>
     );
   }

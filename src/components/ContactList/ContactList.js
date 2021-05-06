@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 import { connect } from 'react-redux';
 import operations from '../../redux/contacts/contacts-operations';
+import selectors from '../../redux/contacts/contacts-selectors';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class ContactList extends Component {
   componentDidMount() {
@@ -14,7 +16,7 @@ class ContactList extends Component {
     const { contacts, deleteContact } = this.props;
 
     return (
-      <ul>
+      <ListGroup className={s.ListGroup}>
         {contacts.map(({ name, number, id }) => {
           return (
             <ContactListItem
@@ -27,7 +29,7 @@ class ContactList extends Component {
             />
           );
         })}
-      </ul>
+      </ListGroup>
     );
   }
 }
@@ -36,15 +38,8 @@ ContactList.propTypes = {
   deleteContact: PropTypes.func.isRequired,
 };
 
-const getContactsToShow = ({ filter, items }) => {
-  const normalizedFilter = filter.toLowerCase();
-  return items.filter(({ name }) =>
-    name ? name.toLowerCase().includes(normalizedFilter) : false,
-  );
-};
-
 const mapStateToProps = state => ({
-  contacts: getContactsToShow(state.contacts),
+  contacts: selectors.getContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({
