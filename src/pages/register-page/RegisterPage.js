@@ -31,8 +31,9 @@ class RegisterPage extends Component {
         <h2>Registration page</h2>
         <Form onSubmit={this.handleSubmit} className={s.Form}>
           <Form.Group controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
+            <Form.Label className={s.TextLabel}>Name</Form.Label>
             <Form.Control
+              className={s.FormControl}
               type="name"
               name="name"
               value={this.state.name}
@@ -42,8 +43,9 @@ class RegisterPage extends Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label className={s.TextLabel}>Email address</Form.Label>
             <Form.Control
+              className={s.FormControl}
               type="email"
               name="email"
               value={this.state.email}
@@ -53,8 +55,9 @@ class RegisterPage extends Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className={s.TextLabel}>Password</Form.Label>
             <Form.Control
+              className={s.FormControl}
               type="password"
               name="password"
               placeholder="Password"

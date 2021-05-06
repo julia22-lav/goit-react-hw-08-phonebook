@@ -13,3 +13,14 @@ h2 {
   display: block;
   margin-top: 15px;
 }
+
+.TextLabel {
+  margin-bottom: 0;
+  color: purple;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.FormControl {
+  margin-bottom: 12px;
+}

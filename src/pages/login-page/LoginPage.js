@@ -31,8 +31,9 @@ class LoginPage extends Component {
         <h2>Login page</h2>
         <Form onSubmit={this.handleSubmit} className={s.Form}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label className={s.TextLabel}>Email address</Form.Label>
             <Form.Control
+              className={s.FormControl}
               type="email"
               name="email"
               value={this.state.email}
@@ -42,8 +43,9 @@ class LoginPage extends Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className={s.TextLabel}>Password</Form.Label>
             <Form.Control
+              className={s.FormControl}
               type="password"
               name="password"
               placeholder="Enter password"
